@@ -12,62 +12,6 @@
   "components": {
     "agents": [
       {
-        "id": "opencoder",
-        "name": "OpenCoder",
-        "type": "agent",
-        "path": ".opencode/agent/core/opencoder.md",
-        "legacy_path": ".opencode/agent/opencoder.md",
-        "aliases": [
-          "opencoder"
-        ],
-        "description": "Specialized development agent for complex coding, architecture, and multi-file refactoring",
-        "tags": [
-          "development",
-          "architecture",
-          "coding",
-          "refactoring"
-        ],
-        "dependencies": [
-          "context:standards-code",
-          "context:component-planning",
-          "subagent:build-agent",
-          "subagent:coder-agent",
-          "subagent:contextscout",
-          "subagent:documentation",
-          "subagent:reviewer",
-          "subagent:task-manager",
-          "subagent:tester"
-        ],
-        "category": "core"
-      },
-      {
-        "id": "openagent",
-        "name": "OpenAgent",
-        "type": "agent",
-        "path": ".opencode/agent/core/openagent.md",
-        "legacy_path": ".opencode/agent/openagent.md",
-        "aliases": [
-          "openagent"
-        ],
-        "description": "Universal agent for answering queries, executing tasks, and coordinating workflows across any domain",
-        "tags": [
-          "universal",
-          "flexible",
-          "coordination"
-        ],
-        "dependencies": [
-          "context:standards-code",
-          "context:standards-docs",
-          "context:standards-tests",
-          "context:workflows-delegation",
-          "context:workflows-review",
-          "subagent:contextscout",
-          "subagent:documentation",
-          "subagent:task-manager"
-        ],
-        "category": "essential"
-      },
-      {
         "id": "system-builder",
         "name": "OpenSystemBuilder",
         "type": "agent",
@@ -139,6 +83,57 @@
         "tags": [],
         "dependencies": [],
         "category": "meta"
+      },
+      {
+        "id": "opencoder",
+        "name": "OpenCoder",
+        "type": "agent",
+        "path": ".opencode/agent/core/opencoder.md",
+        "description": "Orchestration agent for complex coding, architecture, and multi-file refactoring",
+        "tags": [
+          "development",
+          "coding",
+          "implementation"
+        ],
+        "dependencies": [
+          "subagent:documentation",
+          "subagent:coder-agent",
+          "subagent:tester",
+          "subagent:reviewer",
+          "subagent:build-agent",
+          "subagent:contextscout",
+          "subagent:externalscout",
+          "context:standards-code",
+          "context:workflows-delegation",
+          "context:component-planning",
+          "context:external-libraries"
+        ],
+        "category": "core"
+      },
+      {
+        "id": "openagent",
+        "name": "OpenAgent",
+        "type": "agent",
+        "path": ".opencode/agent/core/openagent.md",
+        "description": "Universal agent for answering queries, executing tasks, and coordinating workflows across any domain",
+        "tags": [
+          "universal",
+          "coordination",
+          "primary"
+        ],
+        "dependencies": [
+          "subagent:task-manager",
+          "subagent:documentation",
+          "subagent:contextscout",
+          "subagent:externalscout",
+          "context:standards-code",
+          "context:standards-docs",
+          "context:standards-tests",
+          "context:review-ref",
+          "context:delegation-ref",
+          "context:external-libraries"
+        ],
+        "category": "core"
       }
     ],
     "subagents": [
@@ -405,6 +400,22 @@
         "tags": [],
         "dependencies": [],
         "category": "test"
+      },
+      {
+        "id": "context-manager",
+        "name": "ContextManager",
+        "type": "subagent",
+        "path": ".opencode/agent/subagents/core/context-manager.md",
+        "description": "Context organization and lifecycle management specialist - discovers, catalogs, validates, and maintains project context structure with dependency tracking",
+        "tags": [
+          "context",
+          "organization",
+          "management",
+          "lifecycle",
+          "catalog"
+        ],
+        "dependencies": [],
+        "category": "core"
       }
     ],
     "commands": [
@@ -450,6 +461,26 @@
         "dependencies": [
           "subagent:context-organizer",
           "subagent:contextscout"
+        ],
+        "category": "essential"
+      },
+      {
+        "id": "add-context",
+        "name": "Add Context",
+        "type": "command",
+        "path": ".opencode/command/add-context.md",
+        "description": "Interactive wizard to add project patterns using Project Intelligence standard",
+        "tags": [
+          "context",
+          "onboarding",
+          "project-intelligence",
+          "wizard"
+        ],
+        "dependencies": [
+          "subagent:context-organizer",
+          "context:mvi",
+          "context:frontmatter",
+          "context:project-intelligence"
         ],
         "category": "essential"
       },
@@ -1437,31 +1468,11 @@
         "category": "standard"
       },
       {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/system-builder-templates/navigation.md",
-        "description": "System Builder Templates",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
         "id": "scroll-animation-prompts",
         "name": "Scroll Animation Prompts",
         "type": "context",
         "path": ".opencode/context/ui/web/design/lookup/scroll-animation-prompts.md",
         "description": "Lookup: Scroll Animation Image Generation Prompts",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/ui/web/design/navigation.md",
-        "description": "Web Design Patterns",
         "tags": [],
         "dependencies": [],
         "category": "standard"
@@ -1497,51 +1508,11 @@
         "category": "standard"
       },
       {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/ui/web/navigation.md",
-        "description": "Web UI Context",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/ui/terminal/navigation.md",
-        "description": "Terminal UI Context",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/ui/navigation.md",
-        "description": "UI Context",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
         "id": "written-content",
         "name": "Written Content",
         "type": "context",
         "path": ".opencode/context/content-creation/formats/written-content.md",
         "description": "Written Content Guidelines",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/content-creation/formats/navigation.md",
-        "description": "Content Formats Navigation",
         "tags": [],
         "dependencies": [],
         "category": "standard"
@@ -1587,16 +1558,6 @@
         "category": "standard"
       },
       {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/content-creation/workflows/navigation.md",
-        "description": "Content Workflows Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
         "id": "content-matrix",
         "name": "Content Matrix",
         "type": "context",
@@ -1627,36 +1588,6 @@
         "category": "standard"
       },
       {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/content-creation/navigation.md",
-        "description": "Content Creation Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/content-creation/examples/navigation.md",
-        "description": "Content Examples Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/content-creation/principles/navigation.md",
-        "description": "Content Principles Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
         "id": "hooks",
         "name": "Hooks",
         "type": "context",
@@ -1672,16 +1603,6 @@
         "type": "context",
         "path": ".opencode/context/content-creation/principles/audience-targeting.md",
         "description": "Audience Targeting",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/core/workflows/navigation.md",
-        "description": "Core Workflows Navigation",
         "tags": [],
         "dependencies": [],
         "category": "standard"
@@ -1727,16 +1648,6 @@
           "architecture",
           "components"
         ],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/core/navigation.md",
-        "description": "Core Context Navigation",
-        "tags": [],
         "dependencies": [],
         "category": "standard"
       },
@@ -1801,16 +1712,6 @@
         "category": "standard"
       },
       {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/core/standards/navigation.md",
-        "description": "Core Standards Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
         "id": "documentation",
         "name": "Documentation",
         "type": "context",
@@ -1831,26 +1732,6 @@
         "category": "standard"
       },
       {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/frontend/navigation.md",
-        "description": "Frontend Development Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/integration/navigation.md",
-        "description": "Integration Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
         "id": "ui-navigation",
         "name": "Ui Navigation",
         "type": "context",
@@ -1861,101 +1742,11 @@
         "category": "standard"
       },
       {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/navigation.md",
-        "description": "Development Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/backend/navigation.md",
-        "description": "Backend Development Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
         "id": "backend-navigation",
         "name": "Backend Navigation",
         "type": "context",
         "path": ".opencode/context/development/backend-navigation.md",
         "description": "Backend Development Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/principles/navigation.md",
-        "description": "Development Principles Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/infrastructure/navigation.md",
-        "description": "Infrastructure Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/data/navigation.md",
-        "description": "Data Layer Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/learning/navigation.md",
-        "description": "Learning Context",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/navigation.md",
-        "description": "Context Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/product/navigation.md",
-        "description": "Product Context",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/project/navigation.md",
-        "description": "Project Context",
         "tags": [],
         "dependencies": [],
         "category": "standard"
@@ -1976,16 +1767,6 @@
         "type": "context",
         "path": ".opencode/context/openagents-repo/lookup/subagent-test-commands.md",
         "description": "Subagent Testing Commands - Quick Reference",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/openagents-repo/navigation.md",
-        "description": "OpenAgents Control Repository Context",
         "tags": [],
         "dependencies": [],
         "category": "standard"
@@ -2031,16 +1812,6 @@
         "category": "standard"
       },
       {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/data/navigation.md",
-        "description": "Data Context",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
         "id": "testing-subagents-approval",
         "name": "Testing Subagents Approval",
         "type": "context",
@@ -2074,16 +1845,6 @@
         "type": "context",
         "path": ".opencode/context/core/task-management/lookup/task-commands.md",
         "description": "Lookup: Task CLI Commands",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/core/task-management/navigation.md",
-        "description": "Task Management Navigation",
         "tags": [],
         "dependencies": [],
         "category": "standard"
@@ -2124,16 +1885,6 @@
         "type": "context",
         "path": ".opencode/context/development/ai/mastra-ai/lookup/mastra-config.md",
         "description": "Lookup: Mastra Configuration",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/ai/mastra-ai/navigation.md",
-        "description": "MAStra AI Navigation",
         "tags": [],
         "dependencies": [],
         "category": "standard"
@@ -2234,36 +1985,6 @@
         "type": "context",
         "path": ".opencode/context/development/ai/mastra-ai/errors/mastra-errors.md",
         "description": "Errors: Mastra Implementation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/ai/navigation.md",
-        "description": "AI Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/frameworks/navigation.md",
-        "description": "Frameworks Navigation",
-        "tags": [],
-        "dependencies": [],
-        "category": "standard"
-      },
-      {
-        "id": "navigation",
-        "name": "Navigation",
-        "type": "context",
-        "path": ".opencode/context/development/frameworks/tanstack-start/navigation.md",
-        "description": "Tanstack Start Navigation",
         "tags": [],
         "dependencies": [],
         "category": "standard"
@@ -2613,6 +2334,632 @@
           "context:adding-skill"
         ],
         "category": "standard"
+      },
+      {
+        "id": "core-navigation",
+        "name": "Navigation: CORE",
+        "type": "context",
+        "path": ".opencode/context/core/navigation.md",
+        "description": "Navigation guide for core",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "core-standards-navigation",
+        "name": "Navigation: CORE STANDARDS",
+        "type": "context",
+        "path": ".opencode/context/core/standards/navigation.md",
+        "description": "Navigation guide for core standards",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "core-workflows-navigation",
+        "name": "Navigation: CORE WORKFLOWS",
+        "type": "context",
+        "path": ".opencode/context/core/workflows/navigation.md",
+        "description": "Navigation guide for core workflows",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "core-context-system-navigation",
+        "name": "Navigation: CORE CONTEXT SYSTEM",
+        "type": "context",
+        "path": ".opencode/context/core/context-system/navigation.md",
+        "description": "Navigation guide for core context system",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "core-system-navigation",
+        "name": "Navigation: CORE SYSTEM",
+        "type": "context",
+        "path": ".opencode/context/core/system/navigation.md",
+        "description": "Navigation guide for core system",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "core-task-management-navigation",
+        "name": "Navigation: CORE TASK MANAGEMENT",
+        "type": "context",
+        "path": ".opencode/context/core/task-management/navigation.md",
+        "description": "Navigation guide for core task management",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "core-config-navigation",
+        "name": "Navigation: CORE CONFIG",
+        "type": "context",
+        "path": ".opencode/context/core/config/navigation.md",
+        "description": "Navigation guide for core config",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-navigation",
+        "name": "Navigation: DEVELOPMENT",
+        "type": "context",
+        "path": ".opencode/context/development/navigation.md",
+        "description": "Navigation guide for development",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-ai-navigation",
+        "name": "Navigation: DEVELOPMENT AI",
+        "type": "context",
+        "path": ".opencode/context/development/ai/navigation.md",
+        "description": "Navigation guide for development ai",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-backend-navigation",
+        "name": "Navigation: DEVELOPMENT BACKEND",
+        "type": "context",
+        "path": ".opencode/context/development/backend/navigation.md",
+        "description": "Navigation guide for development backend",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-data-navigation",
+        "name": "Navigation: DEVELOPMENT DATA",
+        "type": "context",
+        "path": ".opencode/context/development/data/navigation.md",
+        "description": "Navigation guide for development data",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-frameworks-navigation",
+        "name": "Navigation: DEVELOPMENT FRAMEWORKS",
+        "type": "context",
+        "path": ".opencode/context/development/frameworks/navigation.md",
+        "description": "Navigation guide for development frameworks",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-frontend-navigation",
+        "name": "Navigation: DEVELOPMENT FRONTEND",
+        "type": "context",
+        "path": ".opencode/context/development/frontend/navigation.md",
+        "description": "Navigation guide for development frontend",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-principles-navigation",
+        "name": "Navigation: DEVELOPMENT PRINCIPLES",
+        "type": "context",
+        "path": ".opencode/context/development/principles/navigation.md",
+        "description": "Navigation guide for development principles",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-integration-navigation",
+        "name": "Navigation: DEVELOPMENT INTEGRATION",
+        "type": "context",
+        "path": ".opencode/context/development/integration/navigation.md",
+        "description": "Navigation guide for development integration",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "development-infrastructure-navigation",
+        "name": "Navigation: DEVELOPMENT INFRASTRUCTURE",
+        "type": "context",
+        "path": ".opencode/context/development/infrastructure/navigation.md",
+        "description": "Navigation guide for development infrastructure",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "ui-navigation",
+        "name": "Navigation: UI",
+        "type": "context",
+        "path": ".opencode/context/ui/navigation.md",
+        "description": "Navigation guide for ui",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "ui-web-navigation",
+        "name": "Navigation: UI WEB",
+        "type": "context",
+        "path": ".opencode/context/ui/web/navigation.md",
+        "description": "Navigation guide for ui web",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "ui-terminal-navigation",
+        "name": "Navigation: UI TERMINAL",
+        "type": "context",
+        "path": ".opencode/context/ui/terminal/navigation.md",
+        "description": "Navigation guide for ui terminal",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "ui-web-design-navigation",
+        "name": "Navigation: UI WEB DESIGN",
+        "type": "context",
+        "path": ".opencode/context/ui/web/design/navigation.md",
+        "description": "Navigation guide for ui web design",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-navigation",
+        "name": "Navigation: OPENAGENTS REPO",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/navigation.md",
+        "description": "Navigation guide for openagents repo",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-core-concepts-navigation",
+        "name": "Navigation: OPENAGENTS REPO CORE CONCEPTS",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/core-concepts/navigation.md",
+        "description": "Navigation guide for openagents repo core concepts",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-guides-navigation",
+        "name": "Navigation: OPENAGENTS REPO GUIDES",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/guides/navigation.md",
+        "description": "Navigation guide for openagents repo guides",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-examples-navigation",
+        "name": "Navigation: OPENAGENTS REPO EXAMPLES",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/examples/navigation.md",
+        "description": "Navigation guide for openagents repo examples",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-lookup-navigation",
+        "name": "Navigation: OPENAGENTS REPO LOOKUP",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/lookup/navigation.md",
+        "description": "Navigation guide for openagents repo lookup",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-concepts-navigation",
+        "name": "Navigation: OPENAGENTS REPO CONCEPTS",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/concepts/navigation.md",
+        "description": "Navigation guide for openagents repo concepts",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-errors-navigation",
+        "name": "Navigation: OPENAGENTS REPO ERRORS",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/errors/navigation.md",
+        "description": "Navigation guide for openagents repo errors",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-blueprints-navigation",
+        "name": "Navigation: OPENAGENTS REPO BLUEPRINTS",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/blueprints/navigation.md",
+        "description": "Navigation guide for openagents repo blueprints",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-plugins-navigation",
+        "name": "Navigation: OPENAGENTS REPO PLUGINS",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/plugins/navigation.md",
+        "description": "Navigation guide for openagents repo plugins",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-quality-navigation",
+        "name": "Navigation: OPENAGENTS REPO QUALITY",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/quality/navigation.md",
+        "description": "Navigation guide for openagents repo quality",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "openagents-repo-templates-navigation",
+        "name": "Navigation: OPENAGENTS REPO TEMPLATES",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/templates/navigation.md",
+        "description": "Navigation guide for openagents repo templates",
+        "tags": [
+          "navigation",
+          "guide"
+        ],
+        "dependencies": [],
+        "category": "navigation"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/system-builder-templates/navigation.md",
+        "description": "Overview of available templates for generating context-aware AI systems",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/content-creation/formats/navigation.md",
+        "description": "Content Formats Navigation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/content-creation/workflows/navigation.md",
+        "description": "Content Workflows Navigation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/content-creation/navigation.md",
+        "description": "Content Creation Navigation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/content-creation/examples/navigation.md",
+        "description": "Content Examples Navigation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/content-creation/principles/navigation.md",
+        "description": "Content Principles Navigation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/tasks/schemas/navigation.md",
+        "description": "Task Schemas",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/to-be-consumed/claude-code-docs/navigation.md",
+        "description": "Claude Code Documentation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "context-paths",
+        "name": "Context Paths",
+        "type": "context",
+        "path": ".opencode/context/core/system/context-paths.md",
+        "description": "Additional Context File Paths",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "when-to-delegate",
+        "name": "When To Delegate",
+        "type": "context",
+        "path": ".opencode/context/development/frontend/when-to-delegate.md",
+        "description": "When to Delegate to Frontend Specialist",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "react-patterns",
+        "name": "React Patterns",
+        "type": "context",
+        "path": ".opencode/context/development/frontend/react/react-patterns.md",
+        "description": "React Patterns & Best Practices",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/development/frontend/react/navigation.md",
+        "description": "React Development",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/development/ai/mastra-ai/navigation.md",
+        "description": "MAStra AI Navigation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/development/frameworks/tanstack-start/navigation.md",
+        "description": "Tanstack Start Navigation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/learning/navigation.md",
+        "description": "Learning Context",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/navigation.md",
+        "description": "Context Navigation",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/product/navigation.md",
+        "description": "Product Context",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/project/navigation.md",
+        "description": "Project Context",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "npm-publishing",
+        "name": "Npm Publishing",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/guides/npm-publishing.md",
+        "description": "NPM Publishing Guide",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "github-issues-workflow",
+        "name": "Github Issues Workflow",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/guides/github-issues-workflow.md",
+        "description": "Guide: GitHub Issues and Project Board Workflow",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "navigation",
+        "name": "Navigation",
+        "type": "context",
+        "path": ".opencode/context/data/navigation.md",
+        "description": "Data Context",
+        "tags": [],
+        "dependencies": [],
+        "category": "standard"
+      },
+      {
+        "id": "agent-metadata",
+        "name": "Agent Metadata",
+        "type": "context",
+        "path": ".opencode/context/openagents-repo/core-concepts/agent-metadata.md",
+        "description": "...\\\"               # ✅ Valid OpenCode field",
+        "tags": [
+          "development",
+          "coding"
+        ],
+        "dependencies": [],
+        "category": "standard"
       }
     ],
     "config": [
@@ -2657,6 +3004,7 @@
         "subagent:documentation",
         "skill:task-management",
         "command:context",
+        "command:add-context",
         "command:clean",
         "tool:env",
         "context:essential-patterns",
@@ -2696,6 +3044,7 @@
         "command:commit",
         "command:test",
         "command:context",
+        "command:add-context",
         "command:clean",
         "command:optimize",
         "command:validate-repo",
@@ -2706,7 +3055,6 @@
         "context:quick-start",
         "context:core/*",
         "context:project-intelligence/*",
-        "context:to-be-consumed/*",
         "context:adding-skill",
         "context:ui/*",
         "context:development/*",
@@ -2718,7 +3066,8 @@
         "context:clean-code",
         "context:api-design",
         "config:env-example",
-        "config:readme"
+        "config:readme",
+        "context:openagents-repo/*"
       ]
     },
     "business": {
@@ -2735,6 +3084,7 @@
         "subagent:image-specialist",
         "skill:task-management",
         "command:context",
+        "command:add-context",
         "command:clean",
         "command:prompt-enhancer",
         "tool:env",
@@ -2745,7 +3095,6 @@
         "context:quick-start",
         "context:core/*",
         "context:project-intelligence/*",
-        "context:to-be-consumed/*",
         "context:adding-skill",
         "config:env-example",
         "config:readme"
@@ -2775,6 +3124,7 @@
         "command:test",
         "command:commit",
         "command:context",
+        "command:add-context",
         "command:clean",
         "command:optimize",
         "command:prompt-enhancer",
@@ -2789,7 +3139,6 @@
         "context:quick-start",
         "context:core/*",
         "context:project-intelligence/*",
-        "context:to-be-consumed/*",
         "context:adding-skill",
         "context:ui/*",
         "context:development/*",
@@ -2801,7 +3150,8 @@
         "context:clean-code",
         "context:api-design",
         "config:env-example",
-        "config:readme"
+        "config:readme",
+        "context:openagents-repo/*"
       ]
     },
     "advanced": {
@@ -2836,6 +3186,7 @@
         "command:test",
         "command:commit",
         "command:context",
+        "command:add-context",
         "command:clean",
         "command:optimize",
         "command:prompt-enhancer",
@@ -2882,7 +3233,7 @@
     }
   },
   "metadata": {
-    "lastUpdated": "2026-01-12",
+    "lastUpdated": "2026-01-31",
     "schemaVersion": "1.0.0"
   },
   "subagents": {
